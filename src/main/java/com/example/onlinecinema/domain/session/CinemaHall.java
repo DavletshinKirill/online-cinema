@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "cinemaHall")
+@Table(name = "cinema_hall")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

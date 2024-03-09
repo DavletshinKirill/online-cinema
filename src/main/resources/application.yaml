@@ -1,6 +1,13 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: ${POSTGRES_PASSWORD}
-    username: ${POSTGRES_USERNAME}
-    url: jdbc:postgresql://localhost:5432/onlineCinema?currentSchema=onlineCinema
+    password: zaq1@WSX
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/onlineCinema
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
