@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: org.postgresql.Driver
-    password: zaq1@WSX
-    username: postgres
     url: jdbc:postgresql://localhost:5432/onlineCinema
+    username: postgres
+    password: zaq1@WSX
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop

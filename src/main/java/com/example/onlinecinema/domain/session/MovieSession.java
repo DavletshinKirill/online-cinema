@@ -25,4 +25,7 @@ public class MovieSession extends BaseEntity {
     @Column(name = "date_start")
     private LocalDateTime date_start;
 
+    private float price;
+
+
 }
