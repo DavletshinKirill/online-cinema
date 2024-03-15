@@ -2,8 +2,10 @@ package com.example.onlinecinema.service.impl;
 
 import com.example.onlinecinema.domain.exeption.ResourceNotFoundException;
 import com.example.onlinecinema.domain.movie.Movie;
+import com.example.onlinecinema.domain.movie.MovieImage;
 import com.example.onlinecinema.domain.session.MovieSession;
 import com.example.onlinecinema.repository.MovieRepository;
+import com.example.onlinecinema.service.interfaces.MinioService;
 import com.example.onlinecinema.service.interfaces.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,16 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
+    @Override
+    public void uploadImage(Long id, MovieImage movieImage) {
+        Movie movie = getMovieById(id);
+        String filename = minioService.upload(movieImage);
+        movie.setPoster(filename);
+        movieRepository.save(movie);
+    }
 
     private final MovieRepository movieRepository;
+    private final MinioService minioService;
 
     @Override
     public Movie create(Movie movie) {

@@ -1,15 +1,15 @@
 package com.example.onlinecinema.config;
 
-import com.example.onlinecinema.web.mapper.MovieMapper;
-import com.example.onlinecinema.web.mapper.MovieSessionMapper;
-import com.example.onlinecinema.web.mapper.TicketMapper;
-import com.example.onlinecinema.web.mapper.UserMapper;
+import com.example.onlinecinema.web.mapper.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapperConfig {
+
+    @Bean
+    public ImageMapper imageMapper(){ return  Mappers.getMapper(ImageMapper.class);}
 
     @Bean
     public MovieMapper movieMapper() {
