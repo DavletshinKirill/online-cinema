@@ -1,4 +1,4 @@
 package com.example.onlinecinema.web.validation;
 
-public class OnCreate {
+public interface OnCreate {
 }

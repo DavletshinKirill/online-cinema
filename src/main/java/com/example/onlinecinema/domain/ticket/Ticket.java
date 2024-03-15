@@ -1,20 +1,28 @@
 package com.example.onlinecinema.domain.ticket;
 
-import com.example.onlinecinema.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Entity
 @Table(name = "tickets")
 @NoArgsConstructor
 @Data
-public class Ticket extends BaseEntity {
+public class Ticket {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+
     @Enumerated(EnumType.STRING)
     private Status booking;
+
+
+    public Ticket(Status status) {
+        booking = status;
+    }
 }

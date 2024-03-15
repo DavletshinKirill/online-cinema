@@ -6,22 +6,44 @@ import com.example.onlinecinema.repository.TicketRepository;
 import com.example.onlinecinema.service.interfaces.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
     @Override
-    public Ticket bookTicket(int index) {
-        Ticket ticket = ticketRepository.findById((long) index).get();
-        ticket.setBooking(Status.BOOKED);
-        return ticketRepository.save(ticket);
+    public ArrayList<Ticket> bookTicket(ArrayList<Long> indexes) {
+
+        ArrayList<Ticket> tickets = new ArrayList<>(ticketRepository.findAllById(indexes));
+        tickets.forEach(ticket -> ticket.setBooking(Status.BOOKED));
+        ticketRepository.saveAll(tickets);
+        return tickets;
     }
 
     @Override
-    public Ticket buyTicket(int index) {
-        Ticket ticket = ticketRepository.findById((long) index).get();
-        ticket.setBooking(Status.BOUGHT);
-        return ticketRepository.save(ticket);
+    public ArrayList<Ticket> buyTicket(ArrayList<Long> indexes) {
+        ArrayList<Ticket> tickets = new ArrayList<>(ticketRepository.findAllById(indexes));
+        tickets.forEach(ticket -> ticket.setBooking(Status.BOUGHT));
+        ticketRepository.saveAll(tickets);
+        return tickets;
+    }
+
+    @Override
+    public ArrayList<Ticket> getAllTicketsBySessionId(Long session_id) {
+        return new ArrayList<>(ticketRepository.findAllBySessionId(session_id));
+    }
+
+    @Override
+    public void deleteTikets(ArrayList<Ticket> tickets) {
+        ticketRepository.deleteAll(tickets);
+    }
+
+    @Override
+    public void saveTickets(List<Ticket> tickets) {
+        ticketRepository.saveAll(tickets);
     }
 }

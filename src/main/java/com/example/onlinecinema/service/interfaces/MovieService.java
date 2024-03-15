@@ -1,6 +1,7 @@
 package com.example.onlinecinema.service.interfaces;
 
 import com.example.onlinecinema.domain.movie.Movie;
+import com.example.onlinecinema.domain.session.MovieSession;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface MovieService {
     Movie getMovieById(Long id);
 
     List<Movie> getAllMovies();
+
+    MovieSession createMovieSession(Long id, MovieSession movieSession);
 }
