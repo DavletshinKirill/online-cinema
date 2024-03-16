@@ -17,3 +17,13 @@ services:
     volumes:
       - minio-data:/minio
     command: server ~/minio --console-address :9090
+
+  redis:
+    image: redis:7.2-rc-alpine
+    restart: always
+    container_name: "online_cinema-redis"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - cache:/data
+    command: redis-server --save 20 1 --loglevel warning --requirepass emFxMUBXU1g=

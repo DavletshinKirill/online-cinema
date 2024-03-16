@@ -16,9 +16,9 @@ import java.util.Set;
 public class UserEntity {
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long user_id;
+    protected Long id;
 
     @Column(name = "username", unique = true)
     private String username;

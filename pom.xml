@@ -20,6 +20,7 @@
 		<jakarta-validation.version>3.0.2</jakarta-validation.version>
 		<springdoc.version>2.3.0</springdoc.version>
 		<minio.version>8.5.8</minio.version>
+		<redis.version>3.2.2</redis.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -70,6 +71,12 @@
 			<groupId>io.minio</groupId>
 			<artifactId>minio</artifactId>
 			<version>${minio.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${redis.version}</version>
 		</dependency>
 
 
