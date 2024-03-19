@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ScheduleServiceImpl implements ScheduleService {
     private final MovieSessionService movieSessionService;
-    @Scheduled(cron = "0 0 * * *")
+    @Scheduled(cron = "0 0 * * * *")
     @Override
     public void deletePastSessions() {
         movieSessionService.deletePastSession();

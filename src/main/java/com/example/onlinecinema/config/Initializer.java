@@ -5,7 +5,6 @@ import com.example.onlinecinema.domain.session.MovieSession;
 import com.example.onlinecinema.domain.user.Role;
 import com.example.onlinecinema.domain.user.UserEntity;
 import com.example.onlinecinema.service.interfaces.MovieService;
-import com.example.onlinecinema.service.interfaces.MovieSessionService;
 import com.example.onlinecinema.service.interfaces.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,14 +19,13 @@ public class Initializer {
 
     private final UserService userService;
     private final MovieService movieService;
-    private final MovieSessionService movieSessionService;
 
     private UserEntity createUser(Long id, String username, String password) {
         Set<Role> roles = new HashSet<>();
         roles.add(Role.ROLE_ADMIN);
         roles.add(Role.ROLE_USER);
         UserEntity user = new UserEntity(id, username, password, roles);
-        user.setUser_id(id);
+        user.setId(id);
         return userService.create(user);
     }
 
@@ -47,7 +45,7 @@ public class Initializer {
     }
 
     public void initialize() {
-        UserEntity user1 = createUser((long)1 , "kirill@gmail.com", "123456");
+        UserEntity user1 = createUser((long)1 , "kirichka27@gmail.com", "123456");
         UserEntity user2 = createUser((long)2, "mikesmith@yahoo.com", "123456");
 
         Movie movie1 = createMovie((long)1, "Темный рыарь", "Кристофер Нолан", "Пока не сделал", 152);

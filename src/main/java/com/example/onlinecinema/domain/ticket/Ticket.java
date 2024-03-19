@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @AllArgsConstructor
 @Entity
 @Table(name = "tickets")
 @NoArgsConstructor
 @Data
-public class Ticket {
+public class Ticket implements Serializable {
 
     @Id
     @Column(name = "id")

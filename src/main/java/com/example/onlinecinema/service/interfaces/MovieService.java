@@ -17,5 +17,6 @@ public interface MovieService {
 
     MovieSession createMovieSession(Long id, MovieSession movieSession);
 
+
     void uploadImage(Long id, MovieImage movieImage);
 }

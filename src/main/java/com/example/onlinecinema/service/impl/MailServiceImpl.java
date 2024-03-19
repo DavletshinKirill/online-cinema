@@ -44,23 +44,23 @@ public class MailServiceImpl implements MailService {
         return stringWriter.getBuffer().toString();
     }
 
-    public void bookTicket(UserEntity user, Movie movie, MovieSession movieSession, Properties properties) throws MessagingException {
+    public void bookTicket(UserEntity user, Movie movie, MovieSession movieSession) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
         helper.setSubject("Билет заказан");
         helper.setTo(user.getUsername());
-        String emailContent = getBookTicketEmailContent(user.getUsername(), properties);
+        String emailContent = getBookTicketEmailContent(user.getUsername(), movie, movieSession);
         helper.setText(emailContent, true);
         javaMailSender.send(mimeMessage);
     }
     @SneakyThrows
-    private String getBookTicketEmailContent(String name, Properties properties) {
+    private String getBookTicketEmailContent(String name, Movie movie, MovieSession movieSession) {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
         model.put("name", name);
-        model.put("title", properties.getProperty("movie.title"));
-        model.put("date",  properties.getProperty("movieSession.date_time"));
-        model.put("price",  properties.getProperty("movieSession.price"));
+        model.put("title", movie.getTitle());
+        model.put("date",  movieSession.getDate_start());
+        model.put("price",  movieSession.getPrice());
         configuration.getTemplate("bookTicket.fthl").process(model, stringWriter);
         return stringWriter.getBuffer().toString();
     }

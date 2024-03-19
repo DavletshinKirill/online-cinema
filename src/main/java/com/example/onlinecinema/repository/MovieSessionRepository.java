@@ -21,4 +21,10 @@ public interface MovieSessionRepository extends JpaRepository<MovieSession, Long
             """, nativeQuery = true)
     List<MovieSession> findPastSession(@Param("now") LocalDateTime now);
 
+    @Query(value = """
+                    SELECT movie_id FROM movie_session ms
+                    WHERE ms.id = :movie_session_id
+        """, nativeQuery = true)
+    Long findMovieIdByMovieSessionId(@Param("movie_session_id") Long movie_session_id);
+
 }

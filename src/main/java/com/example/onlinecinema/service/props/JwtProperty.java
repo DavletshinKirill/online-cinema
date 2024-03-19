@@ -6,10 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "spring.mail")
-public class MailProperty {
-    private String host;
-    private int port;
-    private String username;
-    private String password;
+@ConfigurationProperties(prefix = "security.jwt")
+public class JwtProperty {
+
+    private String secret;
+    private Long access;
+    private Long refresh;
 }
+

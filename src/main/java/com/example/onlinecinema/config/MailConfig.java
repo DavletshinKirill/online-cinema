@@ -14,17 +14,21 @@ import java.util.Properties;
 @EnableScheduling
 @RequiredArgsConstructor
 public class MailConfig {
-    private final MailProperties mailProperties;
+
+    @Bean
+    public MailProperties mailProperties() {
+        return new MailProperties();
+    }
 
 
     @Bean
     public JavaMailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(mailProperties.getHost());
-        mailSender.setPort(mailProperties.getPort());
+        mailSender.setHost(mailProperties().getHost());
+        mailSender.setPort(mailProperties().getPort());
 
-        mailSender.setUsername(mailProperties.getUsername());
-        mailSender.setPassword(mailProperties.getPassword());
+        mailSender.setUsername(mailProperties().getUsername());
+        mailSender.setPassword(mailProperties().getPassword());
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

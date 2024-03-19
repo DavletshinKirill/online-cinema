@@ -1,15 +1,16 @@
 package com.example.onlinecinema.service.impl;
 
 import com.example.onlinecinema.domain.exeption.ResourceNotFoundException;
+import com.example.onlinecinema.domain.movie.Movie;
 import com.example.onlinecinema.domain.session.MovieSession;
 import com.example.onlinecinema.repository.MovieSessionRepository;
+import com.example.onlinecinema.service.interfaces.MovieService;
 import com.example.onlinecinema.service.interfaces.MovieSessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,10 +20,10 @@ import java.util.List;
 public class MovieSessionServiceImpl implements MovieSessionService {
 
     private final MovieSessionRepository movieSessionRepository;
+    private final MovieService movieService;
 
 
     @Override
-    @Transactional
     @CachePut(value = "MovieSessionService::update", key = "#movieSession.id")
     public MovieSession update(MovieSession movieSession) {
 
@@ -34,14 +35,12 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     }
 
     @Override
-    @Transactional
     @CacheEvict(value = "MovieSessionService::deleteById", key = "#id")
     public void deleteById(Long id) {
         movieSessionRepository.deleteById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
     @Cacheable(value = "MovieSessionService::getMovieSessionById", key = "#id")
     public MovieSession getMovieSessionById(Long id) {
         return movieSessionRepository.findById(id)
@@ -51,6 +50,12 @@ public class MovieSessionServiceImpl implements MovieSessionService {
     @Override
     public List<MovieSession> getAllMovieSessionsByMovieId(Long id) {
         return movieSessionRepository.findAllByMovieId(id);
+    }
+
+    @Override
+    public Movie getMovieByMovieSessionId(Long movieSessionId) {
+        Long movie_id = movieSessionRepository.findMovieIdByMovieSessionId(movieSessionId);
+        return movieService.getMovieById(movie_id);
     }
 
     @Override

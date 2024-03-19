@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Table(name = "movies")
 @Data
 @NoArgsConstructor
-public class Movie {
+public class Movie implements Serializable {
 
     @Id
     @Column(name = "id")

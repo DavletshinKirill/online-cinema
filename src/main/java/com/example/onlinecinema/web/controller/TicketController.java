@@ -6,6 +6,7 @@ import com.example.onlinecinema.web.DTO.TicketDTO;
 import com.example.onlinecinema.web.mapper.TicketMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class TicketController {
 
     @Operation(summary = "Book ticket")
     @PutMapping("/book")
-    public List<TicketDTO> bookTicket(@RequestBody ArrayList<Long> indexes) {
+    public List<TicketDTO> bookTicket(@RequestBody ArrayList<Long> indexes) throws MessagingException {
         ArrayList<Ticket> tickets = ticketService.bookTicket(indexes);
         return ticketMapper.toDTO(tickets);
     }

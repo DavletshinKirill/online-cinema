@@ -9,5 +9,5 @@ import java.util.Properties;
 
 public interface MailService {
     void sendRegistrationEmail(UserEntity user, Properties properties) throws MessagingException ;
-    void bookTicket(UserEntity user, Movie movie, MovieSession movieSession, Properties properties) throws MessagingException ;
+    void bookTicket(UserEntity user, Movie movie, MovieSession movieSession) throws MessagingException ;
 }

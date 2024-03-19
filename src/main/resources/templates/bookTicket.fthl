@@ -36,8 +36,8 @@
         <h1 style="text-align: center">Book Ticket</h1>
         <p>Hello, ${name}!</p>
         <p>You have bought a ticket to the movie ${title}</p>
-        <p>At the time ${date | date: "fulldate"}</p>
-        <p>For {price} rubles</p>
+        <p>At the time ${date}</p>
+        <p>For ${price} rubles</p>
     </div>
 </div>
 </body>

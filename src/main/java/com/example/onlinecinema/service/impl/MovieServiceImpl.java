@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ public class MovieServiceImpl implements MovieService {
     private final MinioService minioService;
 
     @Override
-    @Transactional
     @Cacheable(value = "MovieService::getMovieById", key = "#movie.id")
     public Movie create(Movie movie) {
         if (movieRepository.findByTitle(movie.getTitle()).isPresent()) {
@@ -36,7 +34,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    @Transactional
     @CachePut(value = "MovieService::getMovieById", key = "#movie.id")
     public Movie update(Movie movie) {
 
@@ -50,7 +47,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    @Transactional
     @CacheEvict(value = "MovieService:deleteById", key = "#id")
     public void deleteById(Long id) {
         if(movieRepository.findById(id).isEmpty())
@@ -59,7 +55,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     @Cacheable(value = "MovieService::getMovieById", key = "#id")
     public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
@@ -67,13 +62,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<Movie> getAllMovies() {
         return new ArrayList<>(movieRepository.findAll());
     }
 
     @Override
-    @Transactional
     public MovieSession createMovieSession(Long id, MovieSession movieSession) {
 
         movieSession.createTickets();
@@ -89,8 +82,8 @@ public class MovieServiceImpl implements MovieService {
         return movieSession;
     }
 
+
     @Override
-    @Transactional
     public void uploadImage(Long id, MovieImage movieImage) {
         Movie movie = getMovieById(id);
         String filename = minioService.upload(movieImage);

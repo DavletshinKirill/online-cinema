@@ -14,5 +14,11 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
                     WHERE t.cinema_hall_id = :sessionId
             """, nativeQuery = true)
     List<Ticket> findAllBySessionId(@Param("sessionId") Long sessionId);
+
+    @Query(value = """
+                    SELECT cinema_hall_id FROM tickets t
+                    WHERE t.id = :ticket_id
+        """, nativeQuery = true)
+    Long findMovieSessionIdByTicketId(@Param("ticket_id") Long ticket_id);
 }
 
