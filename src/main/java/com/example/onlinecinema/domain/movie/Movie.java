@@ -27,6 +27,18 @@ public class Movie implements Serializable {
     @Column(name = "title", unique = true)
     private String title;
 
+
+    private String country;
+
+    private String actors;
+
+    private int year;
+
+    private String genre;
+
+    private String description;
+
+
     private String director;
 
     private String poster;

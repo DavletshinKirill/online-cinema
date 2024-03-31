@@ -38,6 +38,8 @@ public class MovieSession implements Serializable {
 
     private Float price;
 
+    private String format;
+
     public void createTickets() {
         tickets = IntStream.range(0, rowsAmount * seatsInRow)
                 .mapToObj(ticket -> new Ticket(Status.NONE))

@@ -36,6 +36,30 @@ public class MovieDTO{
     @Length(max = 255, message = "Poster length must be smaller that 255 symbols", groups = {OnCreate.class, OnUpdate.class})
     private String poster;
 
+    @Schema(name = "country", example = "США, Китай, Россия")
+    @NotNull(message = "Сountry must be not null",  groups = {OnCreate.class, OnUpdate.class})
+    @Length(max = 255, message = "Сountry length must be smaller that 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    private String country;
+
+    @Schema(name = "actors", example = "Брэд Питт")
+    @NotNull(message = "Сountry must be not null",  groups = {OnCreate.class, OnUpdate.class})
+    @Length(max = 255, message = "Сountry length must be smaller that 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    private String actors;
+
+    @Schema(name = "genre", example = "Драма, военный")
+    @NotNull(message = "Genre must be not null",  groups = {OnCreate.class, OnUpdate.class})
+    @Length(max = 255, message = "Genre length must be smaller that 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    private String genre;
+
+    @Schema(name = "description", example = "Стоит апрель 1945 года, и победа над немцами уже близка: союзники уверенно продвигаются вглубь вражеской территории, и оказываемое им сопротивление становится слабее день ото дня.")
+    @NotNull(message = "Description must be not null",  groups = {OnCreate.class, OnUpdate.class})
+    @Length(max = 255, message = "Description length must be smaller that 255 symbols", groups = {OnCreate.class, OnUpdate.class})
+    private String description;
+
+    @Schema(name = "year", example = "2014")
+    @NotNull(message = "Year must be not null",  groups = {OnCreate.class, OnUpdate.class})
+    private int year;
+
     @Schema(name = "durationMinutes", example = "150")
     @NotNull(message = "DurationMinutes must be not null",  groups = {OnCreate.class, OnUpdate.class})
     private int durationMinutes;

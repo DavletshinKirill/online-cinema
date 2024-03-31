@@ -8,12 +8,16 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -24,9 +28,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class ApplicationConfig {
     private final JwtTokenProvider tokenProvider;
+
+    @Bean
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager();
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -76,7 +87,11 @@ public class ApplicationConfig {
                                 .permitAll()
                                 .requestMatchers("/v3/api-docs/**")
                                 .permitAll()
-                                .requestMatchers("/api/v1/ticket/book")
+                                .requestMatchers(HttpMethod.GET, "/api/v1/movie/get/**")
+                                .permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/movieSession/get/**")
+                                .permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/ticket/getBySessionId/**")
                                 .permitAll()
                                 .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)

@@ -20,7 +20,7 @@
 		<jakarta-validation.version>3.0.2</jakarta-validation.version>
 		<springdoc.version>2.3.0</springdoc.version>
 		<minio.version>8.5.8</minio.version>
-		<redis.version>3.2.2</redis.version>
+		<redis.version>3.2.3</redis.version>
 		<spring-boot-starter-security.version>3.2.2</spring-boot-starter-security.version>
 		<jjwt.version> 0.12.3</jjwt.version>
 	</properties>
@@ -113,8 +113,6 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 			<version>${redis.version}</version>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>jakarta.validation</groupId>

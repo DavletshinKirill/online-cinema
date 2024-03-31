@@ -21,7 +21,7 @@ public class MovieSessionController {
     private final MovieSessionService movieSessionService;
     private final MovieSessionMapper movieSessionMapper;
 
-    @Operation(summary = "Не работает, переделай")
+    @Operation(summary = "Update movie session")
     @PutMapping("update")
     public MovieSessionDTO update(@RequestBody MovieSessionDTO movieSessionDTO) {
         MovieSession movieSession = movieSessionMapper.toEntity(movieSessionDTO);

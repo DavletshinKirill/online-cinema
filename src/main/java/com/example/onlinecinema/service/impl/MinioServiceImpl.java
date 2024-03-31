@@ -51,6 +51,7 @@ public class MinioServiceImpl implements MinioService {
                         .build());
     }
 
+
     @SneakyThrows
     private void createBucket() {
         boolean found = minioClient.bucketExists(BucketExistsArgs.builder()

@@ -1,6 +1,7 @@
 package com.example.onlinecinema.service.impl;
 
 import com.example.onlinecinema.domain.exeption.ResourceNotFoundException;
+import com.example.onlinecinema.domain.user.Role;
 import com.example.onlinecinema.domain.user.UserEntity;
 import com.example.onlinecinema.repository.UserRepository;
 import com.example.onlinecinema.service.interfaces.UserService;
@@ -11,6 +12,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +34,9 @@ public class UserServiceImpl implements UserService {
             throw new IllegalStateException("User already exist");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getRoles().isEmpty()) {
+            user.setRoles(Set.of(Role.ROLE_USER));
+        }
         return userRepository.save(user);
     }
 

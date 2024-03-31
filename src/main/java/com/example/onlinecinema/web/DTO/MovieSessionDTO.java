@@ -34,6 +34,11 @@ public class MovieSessionDTO {
     private int seatsInRow;
 
 
+    @Schema(name = "format", example = "2D")
+    @NotNull(message = "format must be not null", groups = {OnUpdate.class, OnCreate.class})
+    private String format;
+
+
     @Schema(name = "price", example = "500")
     @NotNull(message = "Price must be not null", groups = {OnUpdate.class, OnCreate.class})
     private Float price;
