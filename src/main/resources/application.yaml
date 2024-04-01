@@ -1,8 +1,18 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+  cache:
+    type: redis
+    cache-names: redis-cache
+  data:
+    redis:
+      host: ${HOST}
+      port: 6379
+      password: ${CACHE_PASSWORD}
   datasource:
     url: jdbc:postgresql://localhost:5432/onlineCinema
-    username: postgres
-    password: zaq1@WSX
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,3 +21,25 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+
+springdoc:
+  override-with-generic-response: false
+
+minio:
+  bucket: images
+  url: http://localhost:9000
+  accessKey: ${MINIO_ACCESS_KEY}
+  secretKey: ${MINIO_SECRET_KEY}
+
+security:
+  jwt:
+    secret: ${SECRET}
+    access: 3600000
+    refresh: 2592000000
+

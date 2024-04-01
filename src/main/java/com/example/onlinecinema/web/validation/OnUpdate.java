@@ -1,4 +1,4 @@
 package com.example.onlinecinema.web.validation;
 
-public class OnUpdate {
+public interface OnUpdate {
 }
